@@ -7,3 +7,20 @@ class Categoria(models.Model):
   def __str__(self):
 			return self.nome
 	
+class Status(models.Model):
+  nome = models.CharField(max_length=50)
+  descricao = models.TextField()
+  
+  def __str__(self):
+			return self.nome
+	
+class Tarefa(models.Model):
+  categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
+  status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
+  titulo = models.CharField(max_length=50)
+  descricao = models.TextField()
+  data_de_vencimento = models.DateTimeField()
+  
+  def __str__(self):
+			return self.title
+	
