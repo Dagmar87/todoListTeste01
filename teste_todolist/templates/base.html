@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicativo Web de Gerenciamento de Tarefas</title>
+    <!-- Include your CSS and JavaScript files here -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Aplicativo de Lista de Tarefas</a>
+        <!-- Add your navigation links here -->
+    </nav>
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <footer class="text-center mt-4">
+        &copy; {{ year }} Seu nome
+    </footer>
+</body>
+</html>
