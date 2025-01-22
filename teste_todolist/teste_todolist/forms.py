@@ -16,3 +16,12 @@ class FormTarefa(ModelForm):
       'descricao': forms.TextInput(attrs={'class': 'form-control'}),
       'data_de_vencimento': DateTimePickerInput(attrs={'class': 'form-control'}),
 		}
+    
+class FormCategoria(ModelForm):
+  class Meta:
+    model = Categoria
+    fields = '__all__'
+    widgets = {
+			'nome': forms.TextInput(attrs={'class': 'form-control'}),
+		  'descricao': forms.TextInput(attrs={'class': 'form-control'}),
+		}
