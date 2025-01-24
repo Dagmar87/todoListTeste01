@@ -28,3 +28,24 @@ def TodoList_View(request):
     'titulo': "Listadetarefas"
 	})
   
+def tarefa_add(request):
+    if request.method == "POST":
+        form = FormTarefa(request.POST)
+        if form.is_valid():
+            tarefa = form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "TarefaListChanged": None,
+                        "showMessage": f"{tarefa.titulo} adicionado."
+                    })
+                })
+    else:
+        form = FormTarefa()
+    return render(request, 'tarefa_form.html', {
+        'form': form,
+    })
+    
+
+  
