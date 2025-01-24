@@ -1,6 +1,51 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <div class="container">
-
+  <h1 class="my-4">Lista de Tarefas</h1>
+  <div class="row">
+    <form method="post">
+      {% csrf_token %}
+      <label for="categoria_filter">Filtrar por Categoria:</label>
+      <select id="categoria_filter" name="categoria_filter">
+        <option value="">Todas as Categorias</option>
+        {% for categoria in categorias %}
+        <option value="{{ categoria.pk }}">{{ categoria.nome }}</option>
+        {% endfor %}
+      </select>
+      <label for="status_filter">Filtrar por Status:</label>
+      <select id="status_filter" name="status_filter">
+        <option value="">Todos os Status</option>
+        {% for status in statuses %}
+        <option value="{{ status.pk }}">{{ status.name }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Aplicar Filtros</button>
+    </form>
+  </div>
+  <div class="col-lg-8">
+    <div class="row">
+      {% for tarefa in tarefas %}
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ tarefa.titulo }}</h5>
+            <p class="card-text">{{ tarefa.descricao }}</p>
+            <p class="card-text">
+              <strong>Data de Vencimento:</strong> {{ tarefa.data_de_vencimento
+              }}
+            </p>
+            <p class="card-text">
+              <strong>Categoria:</strong> {{ tarefa.categoria }}
+            </p>
+            <p class="card-text">
+              <strong>Status:</strong> {{ tarefa.status }}
+            </p>
+            <a href="#" class="btn btn-primary">Editar</a>
+            <a href="#" class="btn btn-danger">Excluir</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}
