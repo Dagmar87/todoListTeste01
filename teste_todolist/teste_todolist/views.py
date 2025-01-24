@@ -113,3 +113,8 @@ def categoria_edit(request, id):
 def status_change(request, id_tarefa, id_status):
     Tarefa.objects.filter(id=id_tarefa).update(status_id=id_status)
     return redirect('/tarefa_list')
+  
+def tarefa_remove(request, id):
+    tarefa = Tarefa.objects.filter(id=id)
+    tarefa.delete()    
+    return redirect('/tarefa_list')
