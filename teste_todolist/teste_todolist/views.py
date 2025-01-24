@@ -1,13 +1,19 @@
-from django.shortcuts import render
-from .models import Tarefa, Categoria, Status
+import json
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.views.decorators.http import require_POST
+from django.shortcuts import get_list_or_404
+from .models import Tarefa, Categoria
 from .forms import FormTarefa, FormCategoria
 
 def index(request):
   return render(request, 'index.html')
 
-def categorias(request):
-  categorias = Categoria.objects.all()
-  return render(request, 'categorias.html', {'categorias': categorias})
+def Categoria_View(request):
+  return render(request, 'categorias_list.html', {
+		'categoria': Categoria.objects.all,
+  	'titulo': "Categoria"
+	})
 
 def todolist(request):
   categorias = Categoria.objects.all()
