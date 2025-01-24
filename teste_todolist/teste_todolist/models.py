@@ -15,8 +15,8 @@ class Status(models.Model):
 			return self.nome
 	
 class Tarefa(models.Model):
-  categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
-  status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
+  categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
+  status_id = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
   titulo = models.CharField(max_length=50)
   descricao = models.TextField()
   data_de_vencimento = models.DateTimeField()
