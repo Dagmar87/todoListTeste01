@@ -47,5 +47,23 @@ def tarefa_add(request):
         'form': form,
     })
     
+def categoria_add(request):
+    if request.method == "POST":
+        form = FormCategoria(request.POST)
+        if form.is_valid():
+            categoria = form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "TarefaListChanged": None,
+                        "showMessage": f"{categoria.nome} adicionado."
+                    })
+                })
+    else:
+        form = FormCategoria()
+    return render(request, 'categoria_form.html', {
+        'form': form,
+    }) 
 
   
