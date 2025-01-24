@@ -98,7 +98,7 @@ def categoria_edit(request, id):
                 status=204,
                 headers={
                     'HX-Trigger': json.dumps({
-                        "categoryListChanged": None,
+                        "categoriaListChanged": None,
                         "showMessage": f"{categoria.nome} atualizado."
                     })
                 }
@@ -118,3 +118,8 @@ def tarefa_remove(request, id):
     tarefa = Tarefa.objects.filter(id=id)
     tarefa.delete()    
     return redirect('/tarefa_list')
+  
+def categoria_remove(request, id):
+    categoria = Categoria.objects.filter(id=id)
+    categoria.delete()    
+    return redirect('/categoria')
