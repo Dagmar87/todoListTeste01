@@ -87,3 +87,25 @@ def tarefa_edit(request, id):
         'form': form,
         'tarefa': tarefa,
     }) 
+    
+def categoria_edit(request, id):
+    categoria = get_list_or_404(Categoria, id=id)
+    if request.method == "POST":
+        form = FormCategoria(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(
+                status=204,
+                headers={
+                    'HX-Trigger': json.dumps({
+                        "categoryListChanged": None,
+                        "showMessage": f"{categoria.nome} atualizado."
+                    })
+                }
+            )
+    else:
+        form = FormCategoria(instance=categoria)
+    return render(request, 'categoria_form.html', {
+        'form': form,
+        'categoria': categoria,
+    })
