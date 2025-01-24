@@ -109,3 +109,7 @@ def categoria_edit(request, id):
         'form': form,
         'categoria': categoria,
     })
+    
+def status_change(request, id_tarefa, id_status):
+    Tarefa.objects.filter(id=id_tarefa).update(status_id=id_status)
+    return redirect('/tarefa_list')
