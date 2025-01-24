@@ -14,24 +14,17 @@ def Categoria_View(request):
 		'categoria': Categoria.objects.all,
   	'titulo': "Categoria"
 	})
-
-def todolist(request):
-  categorias = Categoria.objects.all()
-  statuses = Status.objects.all()
-  if request.method == "POST":
-    categoria_filter = request.POST.get("categoria_filter")
-    status_filter = request.POST.get("status_filter")
-    if categoria_filter and status_filter:
-      tarefas = Tarefa.objects.filter(categoria=categoria_filter, status=status_filter).order_by('data_de_vencimento')
-    elif categoria_filter:
-      tarefas = Tarefa.objects.filter(categoria=categoria_filter).order_by('data_de_vencimento')
-    elif status_filter:
-      tarefas = Tarefa.objects.filter(status=status_filter).order_by('data_de_vencimento')
-    else:
-      tarefas = Tarefa.objects.all().order_by('data_de_vencimento')
-  else:
-    tarefas = Tarefa.objects.all().order_by('data_de_vencimento')
-    
-  return render(request, 'todolist.html',{
-		'tarefas': tarefas, 'categorias': categorias, 'statuses': statuses
+  
+def TodoList_View(request):
+  return render(request, 'tarefa_list.html', {
+    'tarefas_a_fazer': Tarefa.objects.filter(status_id=1).order_by('data_de_vencimento'),
+    'tarefas_em_andamento': Tarefa.objects.filter(status_id=2).order_by('data_de_vencimento'),
+    'tarefas_concluidas': Tarefa.objects.filter(status_id=3).order_by('data_de_vencimento'),
+    'tarefas_abandonadas': Tarefa.objects.order_by('data_de_vencimento').filter(status_id=4).order_by('data_de_vencimento'),
+		'contagem_de_tarefas': Tarefa.objects.filter(status_id=1).count(),
+    'contagem_continua': Tarefa.objects.filter(status_id=2).count(),
+    'contagem_concluida': Tarefa.objects.filter(status_id=3).count(),
+    'contagem_abandonada': Tarefa.objects.filter(status_id=4).count(),
+    'titulo': "Listadetarefas"
 	})
+  
