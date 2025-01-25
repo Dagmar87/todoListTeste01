@@ -7,7 +7,7 @@
 
 ## Descrição
 
-Esse projeto consiste na criação de uma aplicação web de gerenciamento de tarefas (To-Do List) com funcionalidades avançadas., utilizando a linguagem Python com o framework Django.
+Esse projeto consiste na criação de uma aplicação web de gerenciamento de tarefas (To-Do List) com funcionalidades avançadas, utilizando a linguagem Python com o framework Django.
 
 ## Linguagens e Tecnologias utilizadas
 
