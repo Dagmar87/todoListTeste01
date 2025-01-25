@@ -1,0 +1,233 @@
+{% extends 'base.html'%} {%block home%}
+
+<div class="container-fluid">
+  <div class="align-items-center mb-4 d-flex justify-content-between">
+    <div>
+      <h1 class="h3 mb-0 mr-2 text-gray-800">
+        Sua lista de tarefas
+        <button
+          type="button"
+          class="btn border ml-2"
+          style="border: 1rem"
+          hx-get="{% url 'tarefa_add' %}"
+          hx-target="#dialog"
+        >
+          <i class="fa fa-plus"></i>
+        </button>
+      </h1>
+    </div>
+
+    <button
+      class="btn btn-primary"
+      hx-get="{% url 'categoria_add' %}"
+      hx-target="#dialog"
+    >
+      Nova Categoria
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+              >
+                Pendência
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {{contagem_de_tarefas}}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-warning shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+              >
+                Em andamento
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {{contagem_continua}}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-pen fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-success text-uppercase mb-1"
+              >
+                Feito
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {{contagem_concluida}}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-check fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-danger shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div
+                class="text-xs font-weight-bold text-danger text-uppercase mb-1"
+              >
+                Abandonado
+              </div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {{contagem_abandonada}}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-ban fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3">
+      {% for Tarefa in tarefas_a_fazer %}
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">
+            {{Tarefa.titulo}}
+            <div class="badge rounded-pill bg-danger" style="color: white">
+              <i class="fas fa-tag text-white" style="font-size: 0.6rem"></i>
+              {{Tarefa.categoria_id}}
+            </div>
+          </h6>
+          {%include 'status_card.html'%}
+        </div>
+        {%include 'tarefa_card.html'%} {%include 'modal.html'%} {% endfor %}
+      </div>
+      <div class="col-lg-3">
+        {% for Tarefa in tarefas_em_andamento %}
+        <div class="card shadow mb-4">
+          <div
+            class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+          >
+            <h6 class="m-0 font-weight-bold text-warning">
+              {{Tarefa.titulo}}
+              <div class="badge rounded-pill bg-danger" style="color: white">
+                <i class="fas fa-tag text-white" style="font-size: 0.6rem"></i>
+                {{Tarefa.categoria_id}}
+              </div>
+            </h6>
+            {%include 'status_card.html'%}
+          </div>
+
+          {%include 'tarefa_card.html'%} {%include 'modal.html'%} {% endfor %}
+        </div>
+        <div class="col-lg-3">
+          {% for Tarefa in tarefas_concluidas %}
+          <div class="card shadow mb-4">
+            <div
+              class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+            >
+              <h6 class="m-0 font-weight-bold text-success">
+                {{Tarefa.titulo}}
+                <div class="badge rounded-pill bg-danger" style="color: white">
+                  <i
+                    class="fas fa-tag text-white"
+                    style="font-size: 0.6rem"
+                  ></i>
+                  {{Tarefa.categoria_id}}
+                </div>
+              </h6>
+              {%include 'status_card.html'%}
+            </div>
+            {%include 'tarefa_card.html'%} {%include 'modal.html'%} {% endfor %}
+          </div>
+          <div class="col-lg-3">
+            {% for Tarefa in tarefas_abandonadas %}
+            <div class="card shadow mb-4">
+              <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+              >
+                <h6 class="m-0 font-weight-bold text-danger">
+                  {{Tarefa.titulo}}
+                  <div
+                    class="badge rounded-pill bg-danger"
+                    style="color: white"
+                  >
+                    <i
+                      class="fas fa-tag text-white"
+                      style="font-size: 0.6rem"
+                    ></i>
+                    {{Tarefa.categoria_id}}
+                  </div>
+                </h6>
+                {%include 'status_card.html'%}
+              </div>
+              {%include 'tarefa_card.html'%} {%include 'modal.html'%} {% endfor
+              %}
+            </div>
+
+            <div class="row"></div>
+          </div>
+        </div>
+
+        <div id="modal" class="modal fade">
+          <div
+            id="dialog"
+            class="modal-dialog modal-dialog-centered"
+            hx-target="this"
+          ></div>
+        </div>
+
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+          <div
+            id="toast"
+            class="toast align-items-center text-white bg-success border-0"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div class="d-flex">
+              <div id="toast-body" class="toast-body"></div>
+              <button
+                type="button"
+                class="btn-close btn-close-white me-2 m-auto"
+                data-bs-dismiss="toast"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+        </div>
+        {%endblock%}
+      </div>
+    </div>
+  </div>
+</div>
