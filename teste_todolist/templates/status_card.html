@@ -1,0 +1,74 @@
+<div class="dropdown no-arrow">
+  <a
+    class="dropdown-toggle"
+    href="#"
+    role="button"
+    id="dropdownMenuLink"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+  </a>
+  <div
+    class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+    aria-labelledby="dropdownMenuLink"
+  >
+    <div class="dropdown-header">Alterar status :</div>
+    <a class="dropdown-item" href="{% url 'status_change' Tarefa.id 1%}">
+      <div class="status-circle bg-primary"></div>
+      Pendência
+    </a>
+    <a class="dropdown-item" href="{% url 'status_change' Tarefa.id 2%}">
+      <div class="status-circle bg-warning"></div>
+      Em andamento
+    </a>
+    <a class="dropdown-item" href="{% url 'status_change' Tarefa.id 3%}">
+      <div class="status-circle bg-success"></div>
+      Feito
+    </a>
+    <a class="dropdown-item" href="{% url 'status_change' Tarefa.id 4%}">
+      <div class="status-circle bg-danger"></div>
+      Abandonado
+    </a>
+    <div class="dropdown-divider"></div>
+    <button
+      class="dropdown-item"
+      class="btn btn-danger"
+      data-bs-toggle="modal"
+      data-bs-target="#hapus-{{Tarefa.id}}"
+    >
+      Excluir
+    </button>
+  </div>
+  <div class="modal fade" tabindex="-1" role="dialog" id="hapus-{{Tarefa.id}}">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-weight: bold">
+            Tem certeza de que deseja excluir?
+          </h5>
+          <button
+            type="button"
+            class="btn text-danger"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            X
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Titulo da tarefa : {{ Tarefa.titulo}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-bs-dismiss="modal">
+            Cancelar
+          </button>
+          <a href="{% url 'tarefa_remove' Tarefa.id%}" class="btn btn-danger"
+            >Claro</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
