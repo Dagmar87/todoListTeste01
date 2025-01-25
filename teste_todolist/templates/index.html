@@ -1,0 +1,57 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="pt-br" class="h-100">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <title>Todo-list Web App</title>
+    <link href="{% static 'css/sb-admin-2.css'%}" rel="stylesheet" />
+    <style>
+      body {
+        background-image: url("{% static 'img/bg.jpg'%}");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <link href="{% static 'css/cover.css'%}" rel="stylesheet" />
+  </head>
+  <body class="d-flex h-100 text-center text-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="mb-auto">
+        <div>
+          <h3 class="float-md-start mb-0">Bem vindo a Lista de Tarefas</h3>
+          <nav class="nav nav-masthead justify-content-center float-md-end">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="/tarefa_list">Lista de Tarefas</a>
+          </nav>
+        </div>
+      </header>
+      <main class="px-3">
+        <h1>Todo-list Web App</h1>
+        <p class="lead">
+          Este é um projeto de uma aplicação web de gerenciamento de tarefas
+          (To-Do List) com funcionalidades avançadas para o teste para a vaga de
+          Desenvolvidor Python Pleno da empresa GESTAO OPME LTDA.
+        </p>
+      </main>
+      <footer class="mt-auto text-dark-50">
+        <p>Este projeto foi feito por José Dagmar FSS</p>
+      </footer>
+    </div>
+  </body>
+</html>
