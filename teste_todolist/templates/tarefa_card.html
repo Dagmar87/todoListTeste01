@@ -1,0 +1,14 @@
+<div
+  class="card-body clickable"
+  hx-get="{% url 'tarefa_edit' id=Tarefa.id %}"
+  hx-target="#dialog"
+>
+  <div>{{Tarefa.descricao}}</div>
+  <div
+    class="mt-2 text-danger"
+    style="font-size: 0.7rem; font-weight: bold"
+    id="{{Tarefa.id}}"
+  >
+    Data de vencimento : {{Tarefa.data_de_vencimento}}
+  </div>
+</div>
