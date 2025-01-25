@@ -1,0 +1,98 @@
+{% extends 'base.html'%} {%block categoria%}
+<div class="card-body">
+  <button
+    class="btn btn-primary mb-2"
+    hx-get="{% url 'categoria_add' %}"
+    hx-target="#dialog"
+  >
+    Nova Categoria
+  </button>
+  <div class="table-responsive">
+    <table
+      class="table table-bordered"
+      id="dataTable"
+      width="100%"
+      cellspacing="0"
+    >
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th>Opção</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for Categoria in categoria %}
+        <tr>
+          <td>{{ Categoria.id}}</td>
+          <td>{{ Categoria.nome}}</td>
+          <td>{{ Categoria.descricao}}</td>
+          <td>
+            <a
+              class="btn btn-primary"
+              hx-get="{% url 'categoria_edit' id=Categoria.id %}"
+              hx-target="#dialog"
+              >Editar</a
+            >
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-toggle="modal"
+              data-bs-target="#hapus-{{Categoria.id}}"
+            >
+              Excluir
+            </button>
+          </td>
+          <div
+            class="modal fade"
+            tabindex="-1"
+            role="dialog"
+            id="hapus-{{Categoria.id}}"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" style="font-weight: bold">
+                    Tem certeza de que deseja excluir?
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn text-danger"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    X
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <p>Nome da Categoria : {{ Categoria.name}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <a
+                    href="{% url 'categoria_remove' Categoria.id%}"
+                    class="btn btn-danger"
+                    >Claro</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<div id="modal" class="modal fade">
+  <div
+    id="dialog"
+    class="modal-dialog modal-dialog-centered"
+    hx-target="this"
+  ></div>
+</div>
+{%endblock%}
