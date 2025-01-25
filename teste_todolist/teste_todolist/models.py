@@ -6,6 +6,7 @@ class Categoria(models.Model):
   
   def __str__(self):
 			return self.nome
+ 
 	
 class Status(models.Model):
   nome = models.CharField(max_length=50)
@@ -13,6 +14,7 @@ class Status(models.Model):
   
   def __str__(self):
 			return self.nome
+ 
 	
 class Tarefa(models.Model):
   categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
@@ -22,5 +24,5 @@ class Tarefa(models.Model):
   data_de_vencimento = models.DateTimeField()
   
   def __str__(self):
-			return self.title
+			return self.titulo
 	
